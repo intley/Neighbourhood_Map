@@ -27,9 +27,17 @@ var locations = [
   }
 ]
 
-// Creating the required map variables
+// Creating the required global map variables
 var map;
-var markers = [];
+
+// ViewModel for the application
+var ViewModel = function() {
+
+}
+
+function initApp() {
+  ko.applyBindings(new ViewModel());
+}
 
 
 // Setting the Google Map object with the customized settings
