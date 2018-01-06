@@ -9,7 +9,9 @@ body {
   height: 100%;
 }
 
-#hdng {
-  position: relative;
-  left: 20px;
+#filter {
+  position: fixed;
+  top: 9px;
+  left: 500px;
+  width: 300px;
 }

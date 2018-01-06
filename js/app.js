@@ -29,10 +29,18 @@ var locations = [
 
 // Creating the required global map variables
 var map;
+var markers = [];
 
 // ViewModel for the application
 var ViewModel = function() {
+  var self = this;
 
+  self.filtertext = ko.observable('');
+  self.markers = [];
+
+  self.filtermarkers = ko.computed (function(){
+
+  })
 }
 
 function initApp() {
@@ -50,7 +58,7 @@ var mapOptions = {
   zoom: 14,
   center: myLatlng,
   mapTypeId: 'roadmap',
-  styles: [
+  /*styles: [
   {
     "elementType": "geometry",
     "stylers": [
@@ -326,7 +334,7 @@ var mapOptions = {
       }
     ]
   }
-]
+]*/
 };
 
 map = new google.maps.Map(document.getElementById('map'), mapOptions);

@@ -3,24 +3,28 @@
   <head>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
   </head>
   <body>
-    <header class="container-fluid">
-      <div class="row">
-        <div class="col-4">
-          <i class="fas fa-bars fa-3x" data-bind="click: navClick"></i>
-        </div>
-      <div class="col-8">
-        <h3>Neighbourhood Map</h3>
-      </div>
-    </div>
-  </header>
-  <div id="map"></div>
+    <!-- Component where the map is filled -->
+    <div id="map"></div>
 
+    <div class="input-group input-group-sm mb-3" id="filter">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Filter</span>
+      </div>
+      <input type="text" class="form-control" aria-label="Small" placeholder="Search Locations" aria-describedby="inputGroup-sizing-sm">
+    </div>
+
+    <!-- Javascript File containing the Model and VM structure -->
     <script src="js/app.js"></script>
+
+    <!-- Fontawesome Icons -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+
+     <!-- Google Maps API call that renders the map -->
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtMT1HFP6GgkPEESSO3G-0m6ZJlCCLAow&v=3&callback=initMap">
     </script>
+
   </body>
 </html>
