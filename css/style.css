@@ -12,6 +12,13 @@ body {
 #filter {
   position: fixed;
   top: 9px;
-  left: 500px;
+  right: 10px;
   width: 300px;
+}
+
+.list-group {
+  position: fixed;
+  top: 39px;
+  right: 10px;
+  width: 250px;
 }

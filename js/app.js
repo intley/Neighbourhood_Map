@@ -35,12 +35,26 @@ var markers = [];
 var ViewModel = function() {
   var self = this;
 
-  self.filtertext = ko.observable('');
-  self.markers = [];
+  self.searchInput = ko.observable('');
+  self.locationList = ko.observableArray([]);
 
-  self.filtermarkers = ko.computed (function(){
+  markers.forEach(function(location) {
+    self.locationList.push(locations.location);
+  });
 
-  })
+self.filteredLocations = ko.computed(function() {
+  var filterText = self.searchInput().toLowerCase();
+
+  return ko.utils.arrayFilter(self.locationList(), function(location) {
+    if (location.title.toLowerCase().indexOf(filterText) != -1) {
+      location.marker.setMap(map);
+      return true;
+    } else {
+      location.marker.setMap(null);
+      return false;
+    }
+  });
+});
 }
 
 function initApp() {
