@@ -16,12 +16,11 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="inputGroup-sizing-sm">Filter</span>
       </div>
-
-      <input type="text" data-bind="textInput: searchInput" class="form-control" aria-label="Small" placeholder="Search Locations" aria-describedby="inputGroup-sizing-sm">
+    <input type="text" data-bind="textInput: searchInput" class="form-control" aria-label="Small" placeholder="Search Locations" aria-describedby="inputGroup-sizing-sm">
     </div>
 
-    <ul class="list-group" data-bind="foreach: filteredLocations">
-      <li data-bind="text: title" class="list-group-item list-group-item-action pointer"></li>
+    <ul data-bind="foreach: filteredLocations" class="list-group" >
+      <li data-bind="text: name" class="list-group-item list-group-item-action pointer"></li>
     </ul>
 
     <!-- Javascript File containing the Model and VM structure -->
