@@ -1,44 +1,8 @@
 // Global Map variable
-var map;
+var map, bounds, infoWindow;
 
 // Creating a blank array for all markers
 var markers = [];
-
-/* ViewModel for the application,
-   Binds the model with the view and controls
-   the functioning of the application.
-*/
-
-var ViewModel = function() {
-  var self = this;
-  self.searchInput = ko.observable('');
-  self.markerlist = ko.observableArray([]);
-
-  markers.forEach(function(location)){
-    self.markerlist.push(new Location(location));
-  });
-
-  self.filteredLocations = ko.computed(function() {
-    var filterText = self.searchInput().toLowerCase();
-
-    return ko.utils.arrayFilter(self.markerlist(), function(location) {
-      if (location.title.toLowerCase().indexOf(filterText) != -1) {
-        location.marker.setMap(map);
-        return true;
-      } else {
-        location.marker.setMap(null);
-        return false;
-      }
-    });
-  });
-
-};
-
-// Applying Bindings to the View
-function initApp() {
-  ko.applyBindings(new ViewModel());
-}
-
 
 /* Model for the app
    Famous Hotels in my locality
@@ -67,14 +31,55 @@ var Location = function(response) {
   // Extend the boundaries of the map for each marker
   bounds.extend(this.position);
 
+};
+
+
+/* ViewModel for the application,
+   Binds the model with the view and controls
+   the functioning of the application.
+*/
+
+var ViewModel = function() {
+  var self = this;
+  self.searchInput = ko.observable('');
+  self.markerlist = ko.observableArray([]);
+
+  markers.forEach(function(location) {
+    self.markerlist.push(new Location(location));
+  });
+
+  self.filteredLocations = ko.computed(function() {
+    var filterText = self.searchInput().toLowerCase();
+
+    return ko.utils.arrayFilter(self.markerlist(), function(location) {
+      if (location.title.toLowerCase().indexOf(filterText) != -1) {
+        location.marker.setMap(map);
+        return true;
+      } else {
+        location.marker.setMap(null);
+        return false;
+      }
+    });
+  });
+
+  self.openInfoWindow = function(response) {
+    populateInfoWindow(response);
+  };
+
+};
+
+// Applying Bindings to the View
+function initApp() {
+  ko.applyBindings(new ViewModel());
 }
+
 
 /* FourSquare API call
    Retrieves data and creates markers to populate map
 */
 
-getLocationData(center, categoryId, radius, limit) {
-  var api_call = 'https://api.foursquare.com/v2/venues/search' +
+function getLocationData(center, categoryId, radius, limit) {
+  var api_call ='https://api.foursquare.com/v2/venues/search' +
                 '?ll=' + center.lat + ',' + center.lng +
                 '&categoryId=' + categoryId +
                 '&radius=' + radius +
@@ -83,6 +88,7 @@ getLocationData(center, categoryId, radius, limit) {
                 'O3A0RUJ0BZSQWVORUVVP12CMMYH2FVIDSUA02BIQMAJFELWO' +
                 '&client_secret=' +
                 'JBBFQMM0PT3PLANGLPNY5UVDINAL3KIE0E5BEUNEFJFDVFB0';
+console.log(api_call)
 
 $.ajax({
   type: 'GET',
@@ -131,8 +137,13 @@ var mapOptions = {
 
 map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-var infoWindow = new google.maps.InfoWindow();
-var bounds = new google.maps.LatLngBounds();
+infoWindow = new google.maps.InfoWindow();
+bounds = new google.maps.LatLngBounds();
+
+var center = {
+  lat: 40.7413549,
+  lng: -73.9980244
+}
 
 getLocationData(center, '4deefb944765f83613cdba6e', 4000, 30);
 
