@@ -29,7 +29,7 @@ var Location = function(response) {
   });
 
   // Extend the boundaries of the map for each marker
-  bounds.extend(this.position);
+  bounds.extend(this.location);
 
 };
 
