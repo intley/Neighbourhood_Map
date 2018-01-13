@@ -169,6 +169,10 @@ var mapOptions = {
           streetViewControlOptions: {
               position: google.maps.ControlPosition.LEFT_TOP
           },
+          fullscreenControl: true,
+          fullscreenControlOptions: {
+            position: google.maps.ControlPosition.LEFT_TOP
+          },
   styles: [
             {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
             {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
