@@ -13,14 +13,14 @@ body {
   position: fixed;
   top: 9px;
   right: 10px;
-  width: 300px;
+  max-width: 250px;
 }
 
 .list-group {
   position: fixed;
   top: 39px;
   right: 10px;
-  max-width: 250px;
+  max-width: 200px;
 }
 
 #foursquare {
