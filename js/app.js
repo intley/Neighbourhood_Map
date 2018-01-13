@@ -1,3 +1,5 @@
+/*jshint sub:true*/
+
 // Global Map variable
 var map, bounds, infoWindow;
 
@@ -141,7 +143,7 @@ function initMap() {
 var myLatlng = {
   lat: 40.7413549,
   lng: -73.9980244
-}
+};
 //var myLatlng = new google.maps.LatLng(40.7413549, -73.9980244);
 
 var mapOptions = {
@@ -238,6 +240,11 @@ getLocationData(myLatlng, '4deefb944765f83613cdba6e', 4000, 7);
 
 }
 
+// Map Error on accessing the Google Maps API
+function mapError() {
+  alert('There was an error accessing the Google Maps API. Please try reloading the page.');
+}
+
 // This function populates the infoWindow when the marker is clicked
 function populateInfoWindow(location) {
   var marker = location.marker;
@@ -264,11 +271,6 @@ function populateInfoWindow(location) {
     infoWindow.addListener('closeclick', function() {
       infoWindow.marker = null;
     });
-
-    // Map Error on accessing the Google Maps API
-    function mapError() {
-      alert('There was an error accessing the Google Maps API. Please try reloading the page.');
-    }
 
     // Set timeout for animation
     setTimeout(function() {
