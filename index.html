@@ -12,7 +12,7 @@
   <body>
 
     <!-- Component where the map is filled -->
-    <div id="map"></div>
+    <div id="map" data-bind="click: hideLocations"></div>
 
     <div class="container">
       <div class="input-group input-group-sm mb-3" id="filter">
@@ -22,7 +22,7 @@
       <input type="text" data-bind="textInput: searchInput, click: showLocations" class="form-control" aria-label="Small" placeholder="Search Locations" aria-describedby="inputGroup-sizing-sm">
     </div>
 
-      <ul data-bind="foreach: filteredLocations, visible: showLocations" class="list-group" >
+      <ul data-bind="foreach: filteredLocations, visible: clickLocations, click: hideLocations" class="list-group" >
         <li data-bind="text: name, click: $parent.openInfoWindow" class="list-group-item list-group-item-action pointer"></li>
       </ul>
     </div>

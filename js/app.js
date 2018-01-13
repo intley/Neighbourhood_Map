@@ -70,8 +70,14 @@ var ViewModel = function() {
     });
   });
 
-  function showLocations() {
-    return true;
+  self.clickLocations = ko.observable(false);
+
+  self.showLocations = function() {
+    self.clickLocations(true);
+  }
+
+  self.hideLocations = function() {
+    self.clickLocations(false);
   }
 
   self.openInfoWindow = function(response) {
