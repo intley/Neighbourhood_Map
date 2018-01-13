@@ -19,10 +19,10 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="inputGroup-sizing-sm">Filter</span>
         </div>
-      <input type="text" data-bind="textInput: searchInput" class="form-control" aria-label="Small" placeholder="Search Locations" aria-describedby="inputGroup-sizing-sm">
+      <input type="text" data-bind="textInput: searchInput, click: showLocations" class="form-control" aria-label="Small" placeholder="Search Locations" aria-describedby="inputGroup-sizing-sm">
     </div>
 
-      <ul data-bind="foreach: filteredLocations" class="list-group" >
+      <ul data-bind="foreach: filteredLocations, visible: showLocations" class="list-group" >
         <li data-bind="text: name, click: $parent.openInfoWindow" class="list-group-item list-group-item-action pointer"></li>
       </ul>
     </div>
@@ -41,7 +41,7 @@
 
      <!-- Google Maps API call that renders the map -->
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtMT1HFP6GgkPEESSO3G-0m6ZJlCCLAow&v=3&callback=initMap" onerror="maperror()">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtMT1HFP6GgkPEESSO3G-0m6ZJlCCLAow&v=3&callback=initMap" onerror="mapError()">
     </script>
 
   </body>

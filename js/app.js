@@ -70,7 +70,9 @@ var ViewModel = function() {
     });
   });
 
-
+  function showLocations() {
+    return true;
+  }
 
   self.openInfoWindow = function(response) {
     populateInfoWindow(response);
@@ -82,7 +84,6 @@ var ViewModel = function() {
 function initApp() {
   ko.applyBindings(new ViewModel());
 }
-
 
 /* FourSquare API call
    Retrieves data and creates markers to populate map
@@ -149,6 +150,19 @@ var myLatlng = {
 var mapOptions = {
   zoom: 13,
   center: myLatlng,
+  mapTypeControl: true,
+          mapTypeControlOptions: {
+              style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+              position: google.maps.ControlPosition.TOP_LEFT
+          },
+          zoomControl: true,
+          zoomControlOptions: {
+              position: google.maps.ControlPosition.LEFT_TOP
+          },
+          streetViewControl: true,
+          streetViewControlOptions: {
+              position: google.maps.ControlPosition.LEFT_TOP
+          },
   styles: [
             {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
             {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
