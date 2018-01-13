@@ -2,39 +2,46 @@
 <html>
   <head>
     <title>Neighborhood Map</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js'></script>
+    <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js'></script>-->
   </head>
   <body>
 
     <!-- Component where the map is filled -->
     <div id="map"></div>
 
-    <div class="input-group input-group-sm mb-3" id="filter">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-sm">Filter</span>
-      </div>
-    <input type="text" data-bind="textInput: searchInput" class="form-control" aria-label="Small" placeholder="Search Locations" aria-describedby="inputGroup-sizing-sm">
+    <div class="container">
+      <div class="input-group input-group-sm mb-3" id="filter">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-sm">Filter</span>
+        </div>
+      <input type="text" data-bind="textInput: searchInput" class="form-control" aria-label="Small" placeholder="Search Locations" aria-describedby="inputGroup-sizing-sm">
     </div>
 
-    <ul data-bind="foreach: filteredLocations" class="list-group" >
-      <li data-bind="text: name" class="list-group-item list-group-item-action pointer"></li>
-    </ul>
+      <ul data-bind="foreach: filteredLocations" class="list-group" >
+        <li data-bind="text: name, click: $parent.openInfoWindow" class="list-group-item list-group-item-action pointer"></li>
+      </ul>
+    </div>
+
+    <img id = "foursquare" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Foursquare_logo.svg/1280px-Foursquare_logo.svg.png">
+
 
     <!-- Javascript File containing the Model and VM structure -->
     <script src="js/app.js"></script>
 
-    <!-- Knockout JS
-    <script src="js/knockout.js"></script> -->
+    <!-- Knockout JS -->
+    <script src="js/knockout.js"></script>
 
     <!-- Fontawesome Icons -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
 
      <!-- Google Maps API call that renders the map -->
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtMT1HFP6GgkPEESSO3G-0m6ZJlCCLAow&v=3&callback=initMap">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtMT1HFP6GgkPEESSO3G-0m6ZJlCCLAow&v=3&callback=initMap" onerror="maperror()">
     </script>
 
   </body>

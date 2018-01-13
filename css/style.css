@@ -20,12 +20,13 @@ body {
   position: fixed;
   top: 39px;
   right: 10px;
-  width: 250px;
+  max-width: 250px;
 }
 
-/*
-.list-group-item {
+#foursquare {
   position: fixed;
-  top: 39px;
-  right: 10px;
-}*/
+  bottom: 30px;
+  left: 10px;
+  max-width: 110px;
+  max-height: 50px;
+}

@@ -3,9 +3,12 @@ var map, bounds, infoWindow;
 
 // Creating a blank array for all markers
 var markers = [];
+//var image = ""
+
+// Image for the marker
 
 /* Model for the app
-   Famous Hotels in my locality
+   Famous Historical places in my locality
 */
 
 var Location = function(response) {
@@ -65,6 +68,8 @@ var ViewModel = function() {
     });
   });
 
+
+
   self.openInfoWindow = function(response) {
     populateInfoWindow(response);
   };
@@ -102,7 +107,7 @@ $.ajax({
     venues.forEach(function (venue) {
       var name = venue['name'];
       var location = venue['location'];
-      var coord = {
+      var ll = {
         lat: location.lat,
         lng: location.lng
       };
@@ -111,7 +116,7 @@ $.ajax({
 
       markers.push({
         name: name,
-        location: coord,
+        location: ll,
         address: address,
         contact: contact,
       });
@@ -125,6 +130,8 @@ $.ajax({
     // Extend the boundaries of the map for each marker
     map.fitBounds(bounds);
     }
+  }).fail(function() {
+    alert('There was an error retrieving data from the Foursquare API. Please try reloading the page.');
   });
 }
 
@@ -139,8 +146,87 @@ var myLatlng = {
 
 var mapOptions = {
   zoom: 13,
-  center: myLatlng
-//  mapTypeId: 'roadmap'
+  center: myLatlng,
+  styles: [
+            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+            {
+              featureType: 'administrative.locality',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'geometry',
+              stylers: [{color: '#263c3f'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#6b9a76'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry',
+              stylers: [{color: '#38414e'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#212a37'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#9ca5b3'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry',
+              stylers: [{color: '#746855'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#1f2835'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#f3d19c'}]
+            },
+            {
+              featureType: 'transit',
+              elementType: 'geometry',
+              stylers: [{color: '#2f3948'}]
+            },
+            {
+              featureType: 'transit.station',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'geometry',
+              stylers: [{color: '#17263c'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#515c6d'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.stroke',
+              stylers: [{color: '#17263c'}]
+            }
+          ]
 };
 
 map = new google.maps.Map(document.getElementById('map'), mapOptions);
@@ -148,7 +234,7 @@ map = new google.maps.Map(document.getElementById('map'), mapOptions);
 infoWindow = new google.maps.InfoWindow();
 bounds = new google.maps.LatLngBounds();
 
-getLocationData(myLatlng, '4deefb944765f83613cdba6e', 4000, 30);
+getLocationData(myLatlng, '4deefb944765f83613cdba6e', 4000, 7);
 
 }
 
@@ -179,9 +265,14 @@ function populateInfoWindow(location) {
       infoWindow.marker = null;
     });
 
+    // Map Error on accessing the Google Maps API
+    function mapError() {
+      alert('There was an error accessing the Google Maps API. Please try reloading the page.');
+    }
+
     // Set timeout for animation
     setTimeout(function() {
       marker.setAnimation(null);
-    }, 700);
+    }, 1000);
   }
 }
